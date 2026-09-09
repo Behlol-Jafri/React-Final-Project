@@ -1,0 +1,20 @@
+{
+  "name": "react-final-project",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "client": "npm run dev --prefix frontend-project",
+    "server": "npm run dev --prefix backend-project",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "concurrently": "^9.1.2",
+    "emailjs-com": "^3.2.0",
+    "multer": "^1.4.5-lts.2"
+  }
+}

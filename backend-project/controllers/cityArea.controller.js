@@ -1,0 +1,59 @@
+const CityArea = require("../models/cityArea");
+class CityAreaController{
+    constructor(){
+    }
+    async GetAll(req,res){
+        try {
+            const foundAll = await CityArea.find();
+            if(!foundAll) return res.status(404).json({message:"CityAreas could not found."});
+            return res.status(200).json(foundAll);
+        } catch (err) {
+            return res.status(500).json(err.message);
+        }
+    }
+    async Create(req,res){
+        try {
+            const obj = req.body;
+            if(!obj.Name) return res.status(404).json({message:"Name could not found."});
+            const created = await CityArea.create(obj);
+            if(!created) return res.status(404).json({message:"CityArea could not created."});
+            res.status(201).json(created);
+        } catch (err) {
+            return res.status(500).json(err.message);
+        }
+    }
+    async GetById(req,res){
+        try {
+            const id = req.params.id;
+            if(!id) return res.status(404).json({message:"Id could not found."});
+            const foundById = await CityArea.findById(id);
+            if(!foundById) return res.status(404).json({message:"CityArea could not found."});
+            return res.status(200).json(foundById);
+        } catch (err) {
+            return res.status(500).json(err.message);
+        }
+    }
+    async Update(req,res){
+        try {
+            const id = req.params.id;
+            if(!id) return res.status(404).json({message:"Id could not found."});
+            const updated = await CityArea.findByIdAndUpdate(id,req.body,{new:true});
+            if(!updated) return res.status(404).json({message:"CityArea could not updated."});
+            return res.status(200).json(updated);
+        } catch (err) {
+            return res.status(500).json(err.message);
+        }
+    }
+    async Delete(req,res){
+        try {
+            const id = req.params.id;
+            if(!id) return res.status(404).json({message:"Id could not found."});
+            const deleted = await CityArea.findByIdAndDelete(id);
+            if(!deleted) return res.status(404).json({message:"CityArea could not deleted."});
+            return res.status(200).json(deleted);
+        } catch (err) {
+            return res.status(500).json(err.message);
+        }
+    }
+}
+module.exports = new CityAreaController();
